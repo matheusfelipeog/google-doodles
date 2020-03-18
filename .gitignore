@@ -1,0 +1,5 @@
+# ignore path do python no vscode
+.vscode/
+
+# ignore ambiente virtual
+venv/
