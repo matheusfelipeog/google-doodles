@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# @author: Matheus Felipe <github.com/matheusfelipeog>
+
 if __name__ == '__main__':
 
     # Builtins

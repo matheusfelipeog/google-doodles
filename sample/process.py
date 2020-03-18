@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# @author: Matheus Felipe <github.com/matheusfelipeog>
+
 # External
 import requests
 from bs4 import BeautifulSoup
