@@ -3,3 +3,6 @@
 
 # ignore ambiente virtual
 venv/
+
+# ignore resultado do process
+data-google-doodles.json
