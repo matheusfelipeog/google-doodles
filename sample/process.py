@@ -4,6 +4,9 @@
 import requests
 from bs4 import BeautifulSoup
 
+# Builtins
+import os
+
 
 def date_format(date: str) -> dict:
     """Formating the date for dict structure
@@ -42,7 +45,7 @@ def date_format(date: str) -> dict:
 data = {}
 
 base_url = "https://www.google.com/doodles/"
-next_doodle = "hungary-national-day-2020"
+next_doodle = "burning-man-festival"
 
 while next_doodle != '#':   
 
@@ -56,14 +59,17 @@ while next_doodle != '#':
     # Date Structure
     date = date_format(soup.select('#title-card > div > div')[0].get_text())  # Argument is a string
 
-
     title = soup.select('#title-card > div > h2')[0].get_text()
 
     url_logo = soup.select('#hplogo-img')[0].get('src')
 
-    url_next_doodle = soup.select('#doodle-newer')[0].get('href')
+    # Get file name in url or create name with title
+    file_name = url_logo.split('/')[-1]  
+    if not file_name.endswith('.gif') and not file_name.endswith('.jpg'):
+        file_name = title.lower().replace(' ', '_') + '.jpg'
 
     # Get next doodle for mapping
+    url_next_doodle = soup.select('#doodle-newer')[0].get('href')
     if '/doodles/' in url_next_doodle:
         next_doodle = url_next_doodle.split('/')[2]  # Remove o /doodles/ da url.
     else:
