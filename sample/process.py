@@ -4,9 +4,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-# Builtins
-import json
-
 
 def date_format(date: str) -> dict:
     """Formating the date for dict structure
@@ -42,7 +39,7 @@ def date_format(date: str) -> dict:
     return new_structure
 
 
-def main(init: str) -> dict:
+def start(init: str) -> dict:
     """Function for initialize data download.
 
     The download takes place from oldest (1998) to newest (presenty).
@@ -60,7 +57,7 @@ def main(init: str) -> dict:
 
     new_data = {}
 
-    print('\nInitialized. This can take a while, wait.')
+    print('\nInitialized. This can take a while, wait...')
     while next_doodle != '#':   
 
         # Creating requests for download the html page -----------
@@ -122,10 +119,3 @@ def main(init: str) -> dict:
     print('Done...')
     # New structure for data google doodles
     return new_data
-
-
-if __name__ == '__main__':
-    data = main("josephine-langs-205th-birthday")
-
-    with open('./sample/data-google-doodles.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4)
