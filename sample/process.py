@@ -7,7 +7,6 @@ from bs4 import BeautifulSoup
 # Builtins
 import os
 
-
 def date_format(date: str) -> dict:
     """Formating the date for dict structure
 
@@ -49,8 +48,13 @@ next_doodle = "burning-man-festival"
 
 while next_doodle != '#':   
 
-    res = requests.get(base_url + next_doodle)
+    # Creating requests for download the html page -----------
+
+    target_url = base_url + next_doodle
+    res = requests.get(target_url)
     res.raise_for_status()
+
+    # HTML parser with BeautifulSoup -----------
 
     soup = BeautifulSoup(res.text, features='html.parser')
 
@@ -67,6 +71,29 @@ while next_doodle != '#':
     file_name = url_logo.split('/')[-1]  
     if not file_name.endswith('.gif') and not file_name.endswith('.jpg'):
         file_name = title.lower().replace(' ', '_') + '.jpg'
+
+    # Creating structure of data doodles ------------
+
+    if date['year'] not in data.keys():
+        data[date['year']] = [
+            {
+                "title": title,
+                "file_name": file_name,
+                "date": date,
+                "url": target_url,
+                "url_logo": 'https:' + url_logo
+            }
+        ]
+    else:
+        data[date['year']].append(
+            {
+                "title": title,
+                "file_name": file_name,
+                "date": date,
+                "url": target_url,
+                "url_logo": 'https:' + url_logo
+            }
+        )
 
     # Get next doodle for mapping
     url_next_doodle = soup.select('#doodle-newer')[0].get('href')
