@@ -10,5 +10,5 @@ if __name__ == '__main__':
 
     data = start("josephine-langs-205th-birthday")
 
-    with open('./sample/data-google-doodles.json', 'w', encoding='utf-8') as f:
+    with open('./data/data-google-doodles.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4)
