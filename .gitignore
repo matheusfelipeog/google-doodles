@@ -4,5 +4,8 @@
 # ignore ambiente virtual
 venv/
 
+# Ignore cache de importação
+__pycache__/
+
 # ignore resultado do process
 data-google-doodles.json
