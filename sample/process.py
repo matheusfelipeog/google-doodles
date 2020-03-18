@@ -5,7 +5,14 @@ import requests
 from bs4 import BeautifulSoup
 
 # Builtins
-import os
+import json
+
+
+BASE_URL = "https://www.google.com/doodles/"
+next_doodle = "burning-man-festival"
+
+data = {}
+
 
 def date_format(date: str) -> dict:
     """Formating the date for dict structure
@@ -41,16 +48,13 @@ def date_format(date: str) -> dict:
     return new_structure
 
 
-data = {}
 
-base_url = "https://www.google.com/doodles/"
-next_doodle = "burning-man-festival"
 
 while next_doodle != '#':   
 
     # Creating requests for download the html page -----------
 
-    target_url = base_url + next_doodle
+    target_url = BASE_URL + next_doodle
     res = requests.get(target_url)
     res.raise_for_status()
 
