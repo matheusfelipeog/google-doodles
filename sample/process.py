@@ -4,6 +4,43 @@
 import requests
 from bs4 import BeautifulSoup
 
+
+def date_format(date: str) -> dict:
+    """Formating the date for dict structure
+
+    Example:
+
+        >>> date = date_format("Mai 15, 2015")
+        >>> print(date)
+
+        Output: 
+            {
+                "month": "Mai",
+                "day": "15",
+                "year": "2015",
+                "full_date": "Mai-15-2015"
+            }
+
+    @param date -> Date in string format with separator "," between day and year
+
+    @return -> dict structure with month, day, year and full date.
+    """
+
+    month, day, year = date.replace(',', '').split(' ')  # Splited date
+    full_date = f'{month}-{day}-{year}'
+
+    new_structure = {
+        "month": month,
+        "day": day,
+        "year": year,
+        "full_date": full_date
+    }
+
+    return new_structure
+
+
+data = {}
+
 base_url = "https://www.google.com/doodles/"
 next_doodle = "hungary-national-day-2020"
 
@@ -15,7 +52,10 @@ while next_doodle != '#':
     soup = BeautifulSoup(res.text, features='html.parser')
 
     # Find data in html page -----------
-    date = soup.select('#title-card > div > div')[0].get_text()
+
+    # Date Structure
+    date = date_format(soup.select('#title-card > div > div')[0].get_text())  # Argument is a string
+
 
     title = soup.select('#title-card > div > h2')[0].get_text()
 
