@@ -1,0 +1,5 @@
+# Ignore quaisquer arquivo dos tipos abaixo
+*.png
+*.jpeg
+*.jpg
+*.gif
