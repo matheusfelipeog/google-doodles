@@ -1,2 +1,2 @@
-# Ignore quaisquer arquivo contido dentro de data/
-data/*
+# Ignore arquivo de dados
+data-google-doodles.json
